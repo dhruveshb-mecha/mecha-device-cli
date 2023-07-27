@@ -18,7 +18,9 @@ struct Cli {
 
 #[derive(Debug, Parser)]
 enum Commands {
+    #[command(name = "display", about = "display commands")]
     Display(DisplayArgs),
+    #[command(name = "battery", about = "battery commands")]
     Battery(BatteryArgs), // Add the battery subcommand
 }   
 

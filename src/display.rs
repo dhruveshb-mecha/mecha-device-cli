@@ -1,13 +1,15 @@
 // File: display.rs
 
 use clap::Args;
-
 use clap::Subcommand;
 
 #[derive(Debug, Subcommand)]
 pub enum DisplayCommands {
+    #[command(name = "on", about = "Turn on the display")]
     On,
+    #[command(name = "off", about = "Turn off the display")]
     Off,
+    #[command(name = "brightness", about = "Adjust the display brightness")]
     Brightness(BrightnessArgs),
 }
 
@@ -20,7 +22,9 @@ pub struct DisplayArgs {
 
 #[derive(Debug, Subcommand)]
 pub enum BrightnessCommands {
+    #[command(name = "get", about = "Get the current brightness level")]
     Get { brightness: Option<String> },
+    #[command(name = "set", about = "Set the brightness level")]
     Set { brightness: Option<String> },
 }
 
@@ -42,7 +46,7 @@ impl DisplayCommands {
 }
 
 impl BrightnessCommands {
-    pub  fn execute(&self) {
+    pub fn execute(&self) {
         match self {
             BrightnessCommands::Get { brightness } => println!("Brightness Get {:?}", brightness),
             BrightnessCommands::Set { brightness } => println!("Brightness Set {:?}", brightness),

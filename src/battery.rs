@@ -1,12 +1,12 @@
 // File: battery.rs
 
 use clap::Args;
-use clap::Parser;
 use clap::Subcommand;
-use clap::ValueEnum;
+
 
 #[derive(Debug, Subcommand)]
 pub enum BatteryCommands {
+    #[command(name = "info", about = "Battery Info")]
     Info,
 }
 
