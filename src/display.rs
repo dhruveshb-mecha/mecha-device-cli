@@ -15,7 +15,7 @@ pub enum DisplayCommands {
 #[command(args_conflicts_with_subcommands = true)]
 pub struct DisplayArgs {
     #[command(subcommand)]
-    pub command: Option<DisplayCommands>,
+    command: Option<DisplayCommands>,
 }
 
 #[derive(Debug, Subcommand)]
@@ -28,5 +28,44 @@ pub enum BrightnessCommands {
 #[command(args_conflicts_with_subcommands = true)]
 pub struct BrightnessArgs {
     #[command(subcommand)]
-    pub command: Option<BrightnessCommands>,
+    command: Option<BrightnessCommands>,
+}
+
+impl DisplayCommands {
+    fn execute(&self) {
+        match self {
+            DisplayCommands::On => println!("Display On"),
+            DisplayCommands::Off => println!("Display Off"),
+            DisplayCommands::Brightness(brightness_args) => brightness_args.execute(),
+        }
+    }
+}
+
+impl BrightnessCommands {
+    pub  fn execute(&self) {
+        match self {
+            BrightnessCommands::Get { brightness } => println!("Brightness Get {:?}", brightness),
+            BrightnessCommands::Set { brightness } => println!("Brightness Set {:?}", brightness),
+        }
+    }
+}
+
+impl BrightnessArgs {
+    fn execute(&self) {
+        if let Some(command) = &self.command {
+            command.execute();
+        } else {
+            println!("Brightness");
+        }
+    }
+}
+
+impl DisplayArgs {
+    pub fn execute(&self) {
+        if let Some(command) = &self.command {
+            command.execute();
+        } else {
+            println!("Display");
+        }
+    }
 }
