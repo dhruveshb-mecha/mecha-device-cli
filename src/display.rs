@@ -49,7 +49,7 @@ impl DisplayCommands {
                 };
 
                 display.set_device("/sys/class/backlight/backlight/brightness");
-                let _ = display.set_brightness(244);  
+                let _ = display.set_brightness(255);  
 
            
         },
