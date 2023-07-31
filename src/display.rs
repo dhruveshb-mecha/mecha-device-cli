@@ -42,7 +42,15 @@ pub struct BrightnessArgs {
 impl DisplayCommands {
     fn execute(&self) {
         match self {
-            DisplayCommands::On => {println!("Display On")
+            DisplayCommands::On => {
+                println!("Display Off");
+                let mut display = Display {
+                    path: String::new(),
+                };
+
+                display.set_device("/sys/class/backlight/backlight/brightness");
+                let _ = display.set_brightness(244);  
+
            
         },
             DisplayCommands::Off =>{
@@ -64,10 +72,25 @@ impl DisplayCommands {
 impl BrightnessCommands {
     pub fn execute(&self) {
         match self {
-            BrightnessCommands::Get { brightness } => {
-                println!("Brightness Get {:?}", brightness)
+            BrightnessCommands::Get { brightness: _ } => {
+                let mut display = Display {
+                    path: String::new(),
+                };
+
+                display.set_device("/sys/class/backlight/backlight/brightness");
+
+                let current_brightness = display.get_brightness();
+                println!("Brightness {:?}", current_brightness);
             },
-            BrightnessCommands::Set { brightness } => println!("Brightness Set {:?}", brightness),
+            BrightnessCommands::Set { brightness } => {
+                let mut display = Display {
+                    path: String::new(),
+                };
+
+                display.set_device("/sys/class/backlight/backlight/brightness");
+
+                let _ = display.set_brightness(brightness.clone().unwrap().parse::<u8>().unwrap());
+            }
         }
     }
 }
