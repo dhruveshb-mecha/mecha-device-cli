@@ -9,4 +9,4 @@ homepage = "https://github.com/dhruveshb-mecha/mecha-device-cli.git"
 
 [dependencies]
 clap = { version = "4.3.17", features = ["derive"] }
-mecha-display = { path = "/Users/jack/mecha/rust/Mecha-Device-Test/mecha-device-test/mecha-device-sdk/mecha-display" }
+mecha-display = { path = "mecha-device-sdk/mecha-display" }
