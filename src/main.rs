@@ -16,6 +16,15 @@ use bluetooth::BluetoothArgs;
 mod wifi;
 use wifi::WifiArgs;
 
+mod device_info;
+use device_info::DeviceInfoArgs;
+
+mod audio;
+use audio::AudioArgs;
+
+mod cpu;
+use cpu::CpuArgs;
+
 /// A fictional versioning CLI
 #[derive(Debug, Parser)]
 #[command(name = "mecha")]
@@ -37,6 +46,12 @@ enum Commands {
     Bluetooth(BluetoothArgs), // Add the bluetooth subcommand
     #[command(name = "wifi", about = "wifi commands")]
     Wifi(WifiArgs), // Add the wifi subcommand
+    #[command(name = "device", about = "device info commands")]
+    DeviceInfo(DeviceInfoArgs),
+    #[command(name = "audio", about = "audio commands")]
+    Audio(AudioArgs), // Add the audio subcommand
+    #[command(name = "cpu", about = "cpu commands")]
+    Cpu(CpuArgs), // Add the cpu subcommand
 
 }   
 
@@ -50,5 +65,8 @@ fn main() {
         Commands::Usb(usb_args) => usb_args.execute(),
         Commands::Bluetooth(bluetooth_args) => bluetooth_args.execute(),
         Commands::Wifi(wifi_args) => wifi_args.execute(),
+        Commands::DeviceInfo(device_info_args) => device_info_args.execute(),
+        Commands::Audio(audio_args) => audio_args.execute(),
+        Commands::Cpu(cpu_args) => cpu_args.execute(),
     }
 }
