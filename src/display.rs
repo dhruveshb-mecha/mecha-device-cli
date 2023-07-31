@@ -1,7 +1,11 @@
 // File: display.rs
 
+
+
 use clap::Args;
 use clap::Subcommand;
+use mecha_display::Display;
+use mecha_display::DisplayInterface;
 
 #[derive(Debug, Subcommand)]
 pub enum DisplayCommands {
@@ -38,8 +42,20 @@ pub struct BrightnessArgs {
 impl DisplayCommands {
     fn execute(&self) {
         match self {
-            DisplayCommands::On => println!("Display On"),
-            DisplayCommands::Off => println!("Display Off"),
+            DisplayCommands::On => {println!("Display On")
+           
+        },
+            DisplayCommands::Off =>{
+                println!("Display Off");
+                let mut display = Display {
+                    path: String::new(),
+                };
+
+                display.set_device("/sys/class/backlight/backlight/brightness");
+                let _ = display.set_brightness(0);  
+
+
+            },
             DisplayCommands::Brightness(brightness_args) => brightness_args.execute(),
         }
     }
@@ -48,7 +64,9 @@ impl DisplayCommands {
 impl BrightnessCommands {
     pub fn execute(&self) {
         match self {
-            BrightnessCommands::Get { brightness } => println!("Brightness Get {:?}", brightness),
+            BrightnessCommands::Get { brightness } => {
+                println!("Brightness Get {:?}", brightness)
+            },
             BrightnessCommands::Set { brightness } => println!("Brightness Set {:?}", brightness),
         }
     }

@@ -171,7 +171,12 @@ name = "mecha"
 version = "0.1.0"
 dependencies = [
  "clap",
+ "mecha-display",
 ]
+
+[[package]]
+name = "mecha-display"
+version = "0.1.0"
 
 [[package]]
 name = "once_cell"

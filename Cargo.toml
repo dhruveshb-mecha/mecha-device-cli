@@ -2,8 +2,11 @@
 name = "mecha"
 version = "0.1.0"
 edition = "2021"
+repository = "https://github.com/dhruveshb-mecha/mecha-device-cli.git"
+homepage = "https://github.com/dhruveshb-mecha/mecha-device-cli.git"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 clap = { version = "4.3.17", features = ["derive"] }
+mecha-display = { path = "/Users/jack/mecha/rust/Mecha-Device-Test/mecha-device-test/mecha-device-sdk/mecha-display" }
